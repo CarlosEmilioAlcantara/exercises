@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+ <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+ <header>
+  <h1>This is a header</h1>
+ </header>
+
+ <section class="container">
+  <p>This is content</p>
+  <img src="./aek-971.jpg" alt="aek-971">
+ </section>
+
+ <section class="list">
+  <ol>
+   <li>List item</li>
+   <li>List item</li>
+   <li>List item</li>
+   <li>List item</li>
+   <li>List item</li>
+  </ol>
+ </section>
+
+ <section class="rem-list">
+  <ul>
+   <li>List item</li>
+   <li>List item</li>
+   <li>List item</li>
+   <li>List item</li>
+   <li>List item</li>
+  </ul>
+ </section>
+
+ <section class="card">
+  <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
+
+  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum 
+     saepe dolor veritatis repellendus mollitia.</p>
+
+  <button class="btn-big">Poof</button>
+  <button class="btn-small">Yeee</button>
+ </section>
+
+ <section class="fancy">
+  <h1>Fancy Header</h1>
+  <img src="medieval-town.png" alt="medieval-town">
+  <div class="column">
+   <div class="content con-1">
+    <h4>Something</h4>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, 
+     ducimus! Non culpa dolore repellat sapiente ex ipsa nesciunt nobis 
+     officia impedit. Ad quod officia ipsam nam dignissimos temporibus odit voluptas!</p>
+   </div>
+
+   <div class="content con-2">
+    <h4>Something</h4>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, 
+     ducimus! Non culpa dolore repellat sapiente ex ipsa nesciunt nobis 
+     officia impedit. Ad quod officia ipsam nam dignissimos temporibus odit voluptas!</p>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, 
+     ducimus! Non culpa dolore repellat sapiente ex ipsa nesciunt nobis 
+     officia impedit. Ad quod officia ipsam nam dignissimos temporibus odit voluptas!</p>
+   </div>
+
+   <div class="content con-1 content-bg con-unspecial">
+    <h4>Something</h4>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, 
+     ducimus! Non culpa dolore repellat sapiente ex ipsa nesciunt nobis 
+     officia impedit. Ad quod officia ipsam nam dignissimos temporibus odit voluptas!</p>
+   </div>
+  </div>
+
+  <div class="column">
+   <div class="content con-3">
+    <h4>Something</h4>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, 
+     ducimus! Non culpa dolore repellat sapiente ex ipsa nesciunt nobis 
+     officia impedit. Ad quod officia ipsam nam dignissimos temporibus odit voluptas!</p>
+   </div>
+
+   <div class="content con-1 content-bg con-special">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, 
+     ducimus! Non culpa dolore repellat sapiente ex ipsa nesciunt nobis 
+     officia impedit. Ad quod officia ipsam nam dignissimos temporibus odit voluptas!</p>
+   </div>
+  </div>
+ </section>
+
+ <header class="header">
+  <!-- This is stupid why do you have a banner inside a nav when only
+       nav links are supposed to go there? Use a container next time -->
+  <nav class="header__nav flex">
+    <div class="header__banner">
+      <h3>Living the simple life</h3>
+      <p class="subtitle">A blog exploring minimalism in life</p>
+    </div>
+
+    <ul class="flex">
+      <li><a href="./index.html" class="current-page">Home</a></li>
+      <li><a href="./about-me.html">About Me</a></li>
+      <li><a href="./recent-posts.html">Recent Posts</a></li>
+    </ul>
+  </nav>
+ </header>
+
+ <div class="container flex">
+  <!-- roles if unique classes if not -->
+  <main role="main">
+    <!-- article = self-contained elements so for example an h1 can be
+         used in an article even when its supposed to be only used once 
+         in the page -->
+    <article class="article-recent flex">
+      <div class="article-recent-main">
+        <h2 class="article-title">Finding simplicity in life</h2>
+
+        <p class="article-body">
+          Life can get complicated really quickly. but it
+          doesn't have to be. There are many ways to simplify your life, 
+          <a href="">a few of which we've explored in the past</a>. This week
+          we're taking a bit of an approach though, in how you can find
+          simplicity in the life you are already living.
+        </p>
+  
+
+        <a href="#" class="article-read-more">CONTINUE READING</a>
+      </div>
+
+      <div class="article-recent-secondary">
+        <img src="./imgs/main.PNG" alt="main" class="article-img">
+
+        <p class="article-info">July 23, 2019</p>
+      </div>
+    </article>
+
+    <article class="article-recent flex">
+      <div class="article-recent-main">
+        <h2 class="article-title">Keeping cooking simple</h2>
+
+        <p class="article-body">
+          Food is a very important part of everyone's life. If you want to be
+          healthy, you have to eat healthy. One of the easiest ways to do that
+          is to keep your cooking nice and simple.
+        </p>
+
+        <a href="#" class="article-read-more">CONTINUE READING</a>
+      </div>
+
+      <div class="article-recent-secondary">
+        <img src="./imgs/food.PNG" alt="food" class="article-img">
+
+        <p class="article-info">July 19, 2019 | 3 comments</p>
+      </div>
+    </article>
+
+    <article class="article-recent flex">
+      <div class="article-recent-main">
+        <h2 class="article-title">Simplicity and work</h2>
+
+        <p class="article-body">
+          Work is often a major source of stress. People get frustrated, it
+          ruins their relationship with others and it leads to burnout. By
+          keeping your work life as simple as possible, it will help balance
+          everything out.
+        </p>
+
+        <a href="#" class="article-read-more">CONTINUE READING</a>
+      </div>
+      <div class="article-recent-secondary">
+        <img src="./imgs/work.PNG" alt="work" class="article-img">
+
+        <p class="article-info">July 12, 2019 | 3 comments</p>
+      </div>
+    </article>
+
+    <article class="article-recent flex">
+      <div class="article-recent-main">
+        <h2 class="article-title">Simple decorations</h2>
+
+        <p class="article-body">
+          A home isn't a home until you've decorated a little. People either
+          don't decorate, or they go overboard and it doesn't have the impact
+          they were hoping for. Staying simple will help draw the eye you want
+          it to and make things pop like never before.
+        </p>
+
+        <a href="#" class="article-read-more"></a>
+      </div>
+
+      <div class="article-recent-secondary">
+        <img src="./imgs/decor.PNG" alt="decor" class="article-img">
+
+        <p class="article-info">July 3, 2019 | 3 comments</p>
+      </div>
+    </article>
+  </main>
+
+  <!-- Some sites have multiple sidebars -->
+  <aside class="sidebar">
+    <div class="sidebar-widget">
+      <h2 class="widget-title">ABOUT ME</h2>
+
+      <img src="./imgs/about.PNG" alt="about">
+
+      <p class="widget-body">
+        I find life better, and I'm happier, when things are nice and simple.
+      </p>
+    </div>
+
+    <div class="sidebar-widget">
+      <h2 class="widget-title">RECENT POSTS</h2>
+
+      <div class="widget-recent-post">
+        <h3 class="widget-recent-post-title">Keeping cooking simple</h3>
+        <img src="./imgs/food.PNG" alt="food" class="widget-image">
+      </div>
+
+      <div class="widget-recent-post">
+        <h3 class="widget-recent-post-title">Simplicity and work</h3>
+        <img src="./imgs/work.PNG" alt="work" class="widget-image">
+      </div>
+
+      <div class="widget-recent-post">
+        <h3 class="widget-recent-post-title">Simple decorations</h3>
+        <img src="./imgs/decor.PNG" alt="decor" class="widget-image">
+      </div>
+
+      <!-- <p>Add this to see :last-child behavior (how it works) </p> -->
+    </div>
+  </aside>
+ </div>
+
+ <footer>
+  <p>Living the Simple Life</p>
+  <p>Copyright 2001</p>
+ </footer>
+</body>
+</html>

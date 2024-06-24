@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+ <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+ <header>
+  <h1>This is a header</h1>
+ </header>
+
+ <section class="container">
+  <p>This is content</p>
+  <img src="./aek-971.jpg" alt="aek-971">
+ </section>
+
+ <section class="list">
+  <ol>
+   <li>List item</li>
+   <li>List item</li>
+   <li>List item</li>
+   <li>List item</li>
+   <li>List item</li>
+  </ol>
+ </section>
+
+ <section class="rem-list">
+  <ul>
+   <li>List item</li>
+   <li>List item</li>
+   <li>List item</li>
+   <li>List item</li>
+   <li>List item</li>
+  </ul>
+ </section>
+
+ <section class="card">
+  <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h3>
+
+  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum 
+     saepe dolor veritatis repellendus mollitia.</p>
+
+  <button class="btn-big">Poof</button>
+  <button class="btn-small">Yeee</button>
+ </section>
+
+ <section class="fancy">
+  <h1>Fancy Header</h1>
+  <img src="medieval-town.png" alt="medieval-town">
+  <div class="column">
+   <div class="content con-1">
+    <h4>Something</h4>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, 
+     ducimus! Non culpa dolore repellat sapiente ex ipsa nesciunt nobis 
+     officia impedit. Ad quod officia ipsam nam dignissimos temporibus odit voluptas!</p>
+   </div>
+
+   <div class="content con-2">
+    <h4>Something</h4>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, 
+     ducimus! Non culpa dolore repellat sapiente ex ipsa nesciunt nobis 
+     officia impedit. Ad quod officia ipsam nam dignissimos temporibus odit voluptas!</p>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, 
+     ducimus! Non culpa dolore repellat sapiente ex ipsa nesciunt nobis 
+     officia impedit. Ad quod officia ipsam nam dignissimos temporibus odit voluptas!</p>
+   </div>
+
+   <div class="content con-1 content-bg con-unspecial">
+    <h4>Something</h4>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, 
+     ducimus! Non culpa dolore repellat sapiente ex ipsa nesciunt nobis 
+     officia impedit. Ad quod officia ipsam nam dignissimos temporibus odit voluptas!</p>
+   </div>
+  </div>
+
+  <div class="column">
+   <div class="content con-3">
+    <h4>Something</h4>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, 
+     ducimus! Non culpa dolore repellat sapiente ex ipsa nesciunt nobis 
+     officia impedit. Ad quod officia ipsam nam dignissimos temporibus odit voluptas!</p>
+   </div>
+
+   <div class="content con-1 content-bg con-special">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, 
+     ducimus! Non culpa dolore repellat sapiente ex ipsa nesciunt nobis 
+     officia impedit. Ad quod officia ipsam nam dignissimos temporibus odit voluptas!</p>
+   </div>
+  </div>
+ </section>
+
+ <header class="header">
+  <!-- This is stupid why do you have a banner inside a nav when only
+       nav links are supposed to go there? Use a container next time -->
+  <nav class="header__nav flex">
+    <div class="header__banner">
+      <h3>Living the simple life</h3>
+      <p class="subtitle">A blog exploring minimalism in life</p>
+    </div>
+
+    <ul class="flex">
+      <li><a href="./index.html" class="current-page">Home</a></li>
+      <li><a href="./about-me.html">About Me</a></li>
+      <li><a href="./recent-posts.html">Recent Posts</a></li>
+    </ul>
+  </nav>
+ </header>
+
+ <div class="container flex">
+  <!-- roles if unique classes if not -->
+  <main role="main">
+    <!-- article = self-contained elements so for example an h1 can be
+         used in an article even when its supposed to be only used once 
+         in the page -->
+    <img src="./medieval-town.png" alt="">
+    <h2>Lorem, ipsum.</h2>
+
+    <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam fugit esse, aperiam est corrupti nobis. Delectus itaque recusandae molestiae autem, ipsa exercitationem, praesentium repellendus numquam suscipit ex repudiandae ratione est?        
+    </p>
+  </main>
+
+  <!-- Some sites have multiple sidebars -->
+  <aside class="sidebar">
+    <div class="sidebar-widget">
+      <h2 class="widget-title">RECENT POSTS</h2>
+
+      <div class="widget-recent-post">
+        <h3 class="widget-recent-post-title">Keeping cooking simple</h3>
+        <img src="./imgs/food.PNG" alt="food" class="widget-image">
+      </div>
+
+      <div class="widget-recent-post">
+        <h3 class="widget-recent-post-title">Simplicity and work</h3>
+        <img src="./imgs/work.PNG" alt="work" class="widget-image">
+      </div>
+
+      <div class="widget-recent-post">
+        <h3 class="widget-recent-post-title">Simple decorations</h3>
+        <img src="./imgs/decor.PNG" alt="decor" class="widget-image">
+      </div>
+
+      <!-- <p>Add this to see :last-child behavior (how it works) </p> -->
+    </div>
+  </aside>
+ </div>
+
+ <footer>
+  <p>Living the Simple Life</p>
+  <p>Copyright 2001</p>
+ </footer>
+</body>
+</html>

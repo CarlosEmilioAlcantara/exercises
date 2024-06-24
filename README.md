@@ -1,3 +1,3 @@
-This is a repository for whatever I'm learning. It's only MySQL at the current moment.
+This is a repository for whatever I'm learning. The 'css-responsive' and 'php' folders are messy right now ^ᵕ^'.
 
 ![Haru Nonaka](haru.gif)

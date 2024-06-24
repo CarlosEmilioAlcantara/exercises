@@ -1,0 +1,48 @@
+1. 
+// Constructor
+function &constructValues(&$array, $for) {
+    $x = "x";
+    if (strcmp($for, $x)) {
+        foreach ($array as $value) {
+            $value = "x_" . $value . "_checked";
+            $x_values[$value] = "";
+        }
+    }
+}
+
+constructValues($values, "x");
+
+2. 
+// THE "&" IS IMPORTANT IT MEANS PASS THE VARIABLE ITSELF INSTEAD OF ITS
+// VALUE SO WE CAN MODIFY IT
+// function constructValues(&$value, $for) {
+//     $x = "x";
+//     if (strcmp($for, $x)) {
+//         $value = "x_" . $value . "_checked";
+//         // echo "{$value} <br>";
+//         // $x_values[$value] = "";
+//     }
+// }
+
+// array_walk($values, "constructValues", "x");
+// array_walk($values, "constructValues", "y");
+
+3.
+// foreach ($values as $value) {
+//     $value = "x_" . $value . "_checked";
+//     $x_values[$value] = "";
+
+//     // Trimming so as to reset the value names
+//     $trimmed_value = rtrim($value, "checked");
+//     $trimmed_value = trim($trimmed_value, "x_");
+
+//     $value = "y_" . $trimmed_value . "_checked";
+//     $y_values[$value] = "";
+// }
+
+4. Kinukuha keys sa multidimensional array
+$x_key = key(array_slice($formula, 0));
+echo $x_key;
+
+$y_key = key(array_slice($formula, 1));
+echo $y_key;
