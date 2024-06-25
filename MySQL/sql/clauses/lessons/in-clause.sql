@@ -16,3 +16,11 @@ FROM
     customers
 WHERE
     state IN ('VA', 'FL', 'GA'); -- same as above but using IN 
+
+SELECT
+    *
+FROM
+    customers
+WHERE
+    state NOT 
+        IN ('VA', 'FL', 'GA'); -- NOT can also be used with IN

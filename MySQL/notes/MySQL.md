@@ -29,6 +29,7 @@
     - [OR](#or)
     - [NOT](#not)
     - [IN](#in)
+    - [BETWEEN](#between)
 
 # Database
 A collection of data stored in a format that can be easily accessed.
@@ -318,4 +319,42 @@ The above code will get every customer with birthdate from 1990 onwards or has p
 The above code will get every customer with birthdate below 1990 onwards and has points less than 1000.
 
 ### IN
-**IN** - 
+**IN** - return records where one of the listed items is found. 
+
+> ```sql
+SELECT
+    *
+FROM
+    customers
+WHERE
+    state IN ('VA', 'FL', 'GA'); -- same as above but using IN 
+> ```
+
+The above code will get all records where the state is any of these three: VA, FL, GA.
+
+> ```sql
+SELECT
+    *
+FROM
+    customers
+WHERE
+    state NOT IN ('VA', 'FL', 'GA'); -- same as above but using IN 
+> ```
+
+Using NOT clause to negate the query.
+
+### BETWEEN
+**BETWEEN** - return records with data in range of the two given values
+
+> ```sql
+SELECT
+    *
+FROM
+    customers
+WHERE
+    points
+    BETWEEN 1000 AND 3000; -- same thing but using BETWEEN, better
+> ```
+
+The above code will get values between 1000 and 3000.
+
