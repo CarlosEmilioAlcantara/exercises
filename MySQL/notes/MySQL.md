@@ -28,8 +28,17 @@
     - [AND](#and)
     - [OR](#or)
     - [NOT](#not)
+  - [Matching Clauses](#matching-clauses)
     - [IN](#in)
     - [BETWEEN](#between)
+    - [LIKE](#like)
+    - [REGEXP](#regexp)
+  - [Looking for Nullity](#looking-for-nullity)
+    - [IS NULL](#is-null)
+    - [IS NOT NULL](#is-not-null)
+  - [Ordering Records](#ordering-records)
+    - [ORDER BY](#order-by)
+    - [LIMIT](#limit)
 
 # Database
 A collection of data stored in a format that can be easily accessed.
@@ -155,7 +164,7 @@ The above code will gather every record from the table customers.
 The above code will filter the result so as to only show the record where the value of the column customer_id is equal to 1.
 
 ### ORDER BY Clause
-**ORDER BY** - arrange the result set either in ascending rcending order.
+**ORDER BY** - arrange the result set either in ascending order.
 
 > ```sql
 > SELECT * FROM customers
@@ -165,7 +174,7 @@ The above code will filter the result so as to only show the record where the va
 The above code will order the query result/show the records in descending order.
 
 ### AS Clause
-**AS** - rename a column. Useful for when columns are created on query.
+**AS** - give alias to a column or table. Useful for when columns are created on query.
 
 > ```sql
 > SELECT 
@@ -188,7 +197,7 @@ The above code will rename the column where mathematical operation on the values
 > ```
 
 ## Query Execution Order
-> SELECT > DISTINCT > AS > FROM/JOIN > WHERE > GROUP BY > HAVING > ORDER BY
+> SELECT > DISTINCT > AS > FROM/JOIN > WHERE > GROUP BY > HAVING > ORDER BY > LIMIT
 
 The execution of queries have an order which cannot be changed.
 
@@ -318,6 +327,7 @@ The above code will get every customer with birthdate from 1990 onwards or has p
 
 The above code will get every customer with birthdate below 1990 onwards and has points less than 1000.
 
+## Matching Clauses
 ### IN
 **IN** - return records where one of the listed items is found. 
 
@@ -344,7 +354,7 @@ WHERE
 Using NOT clause to negate the query.
 
 ### BETWEEN
-**BETWEEN** - return records with data in range of the two given values
+**BETWEEN** - return records with data in range of the two given values.
 
 > ```sql
 SELECT
@@ -358,3 +368,254 @@ WHERE
 
 The above code will get values between 1000 and 3000.
 
+### LIKE
+**LIKE** - return records that match the given pattern. Uses the special characters '%' and '_'.
+
+Special Characters:
+1. % - any number of characters.
+2. _ - any exactly one character.
+
+> ```sql
+> SELECT 
+>     *
+> FROM
+>     customers
+> WHERE
+>     last_name LIKE 'b%' -- match any last name beggining with b
+>                         -- % => any number of characters
+> ```                        
+
+The above code will match last names beggining with b and followed by any number of characters.
+
+> ```sql
+> SELECT 
+>     *
+> FROM
+>     customers
+> WHERE
+>     last_name LIKE '%b' -- match any last name ending with b
+> ```
+
+The above code will match last names ending with b preceded by any number of characters.
+
+> ```sql
+> SELECT 
+>     *
+> FROM
+>     customers
+> WHERE
+>     last_name LIKE '%b%' -- match any last name with b somewhere in the middle
+> ```
+
+The above code will match last names with b preded by and followed by any number of characters.
+
+> ```sql
+> SELECT 
+>     *
+> FROM
+>     customers
+> WHERE
+>     last_name LIKE '_____y' -- match any last name ending with y and with 
+>                             -- exactly 5 characters before y
+> ```
+
+The above code will match exactly a six string last name ending in y.
+
+### REGEXP
+**REGEXP** - match a data according to a regular expression.
+
+> ```sql
+> SELECT 
+>     *
+> FROM
+>     customers
+> WHERE
+>     last_name REGEXP '^field' -- match any last name beggining with field
+> ```
+
+The above code will match any last name with field at the beggining.
+
+> ```sql
+> SELECT 
+>     *
+> FROM
+>     customers
+> WHERE
+>     last_name REGEXP 'field$' -- match any last name ending with field
+> ```
+
+The above code will match any last name with field at the ending.
+
+> ```sql
+> SELECT 
+>     *
+> FROM
+>     customers
+> WHERE
+>     last_name REGEXP 'field|mac' -- match any last name with field or mac
+> ```
+
+The above code will match any last name containing the strings field or mac.
+
+> ```sql
+> SELECT 
+>     *
+> FROM
+>     customers
+> WHERE
+>     last_name REGEXP '[gim]e' -- match any last name with ge, ie, or me
+>                               -- anywhere in the string
+> ```
+
+The above code will match any last name containing the strings ge, ie, or, me.
+
+> ```sql
+> SELECT 
+>     *
+> FROM
+>     customers
+> WHERE
+>     last_name REGEXP '[a-h]e' -- match any last name with a to h + e
+> ```
+
+The above code will match any last name containing the strings from a to h alphabetically plus an e to each letter.
+
+## Looking for Nullity
+### IS NULL
+**IS NULL** - match data that is empty.
+
+> ```sql
+> SELECT
+>     *
+> FROM
+>     customers
+> WHERE
+>     phone IS NULL -- match any customer without a phone number
+> ```
+
+The above code will match all customers without a phone number set.
+
+### IS NOT NULL
+**IS NOT NULL** - using NOT to negate IS NULL to match data that is not empty.
+
+> ```sql
+> SELECT
+>     *
+> FROM
+>     customers
+> WHERE
+>     phone IS NOT NULL -- match any customer with a phone number
+> ```
+
+The above code will match all customers with a phone number set.
+
+## Ordering Records
+### ORDER BY
+**ORDER BY** - return records in ascending order (default) with integers, a to z alphabetically with strings, and latest last with date.
+
+> ```sql
+> SELECT
+>     *
+> FROM
+>     customers
+> ORDER BY    
+>     first_name; -- sort customers name ascending order
+> ```
+
+The code above will sort the customers by their first names a to z.
+
+> ```sql
+> SELECT
+>     *
+> FROM
+>     customers
+> ORDER BY    
+>     first_name DESC; -- sort customers name descending order
+> ```
+
+The code above will sort the customers by their first names z to a.
+
+> ```sql
+> SELECT
+>     *
+> FROM
+>     customers
+> ORDER BY    
+>     state, first_name DESC; -- sort customers by their state 
+>                             -- in ascending order
+>                             -- first then first_name in descending order
+> ```
+
+The code above will sort in a to z the states then if two people are from the same state sort in z to a.
+
+> ```sql
+> SELECT
+>     *
+> FROM
+>     customers
+> ORDER BY    
+>     birth_date;
+> ```
+
+The code above will sort customers from oldest to youngest.
+
+> ```sql
+> SELECT
+>     first_name, last_name, 10 AS points 
+> FROM
+>     customers
+> ORDER BY    
+>     points, first_name;
+> ```
+
+The code above will sort customers by the new alias note that since they all have the point of 10 just sorting by points won't really do anything this is merely an example that you can order by alias.
+
+> ```sql 
+> SELECT 
+>     * 
+> FROM
+>     customers
+> ORDER BY    
+>     birth_date; 
+> ```
+
+The code above will sort customers from oldest to youngest
+
+> ```sql
+> SELECT
+>     first_name, last_name, 10 AS points 
+> FROM
+>     customers
+> ORDER BY    
+>     1, 2 -- 
+>          -- 
+>          -- 
+>          -- 
+> ```
+
+So basically like this, sort by 1 => the first column selected so first_name, and 2 => the second column selected so last_name, this is basically aliasing. A bit simpler but should be avoided as columns selected are quite volatile.
+
+### LIMIT
+**LIMIT** - limit the result to a certain number. 
+
+> ```sql
+> SELECT
+>     *
+> FROM
+>     customers
+> LIMIT    
+>     9; 
+> ```
+
+> ```sql
+> The code above will limit row of records to only 9.
+> 
+> SELECT
+>     *
+> FROM
+>     customers
+> LIMIT    
+>     6, 3;
+> ```
+
+The code above will limit row of records to the 7th to 9th record this is called an offset, it means skip the first six records then display the following three rows.
