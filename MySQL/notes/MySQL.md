@@ -39,6 +39,10 @@
   - [Ordering Records](#ordering-records)
     - [ORDER BY](#order-by)
     - [LIMIT](#limit)
+  - [Joining](#joining)
+    - [(INNER) JOIN](#inner-join)
+      - [ON](#on)
+    - [Aliasing Tables to Make Joins Cleaner](#aliasing-tables-to-make-joins-cleaner)
 
 # Database
 A collection of data stored in a format that can be easily accessed.
@@ -619,3 +623,119 @@ So basically like this, sort by 1 => the first column selected so first_name, an
 > ```
 
 The code above will limit row of records to the 7th to 9th record this is called an offset, it means skip the first six records then display the following three rows.
+
+## Joining
+### (INNER) JOIN
+**JOIN** - combine rows from two or more tables, based on a related column between them.
+
+> ```sql
+> -- join the orders and customers table via their shared column customer_id
+> SELECT
+>     *
+> FROM
+>     orders
+> JOIN
+>     customers
+>     ON orders.customer_id = customers.customer_id 
+> ```
+
+The above code will join the orders and customers table via the column customer_id. 
+
+> ```sql
+> -- this is the point of joining getting values from another table that 
+> -- has a shared column
+> SELECT
+>     order_id, first_name, last_name
+> FROM
+>     orders
+> JOIN
+>     customers
+>     ON orders.customer_id = customers.customer_id 
+> ```
+
+We are now able to select the name of the customers since the orders table is now connected via our (INNER) JOIN clause.
+
+> ```sql
+> -- this won't work as customer_id is in both tables sql would have an
+> -- ambiguous error where it doesn't know in which table it should get
+> -- the customer_id column from
+> SELECT
+>     order_id, customer_id, first_name, last_name
+> FROM
+>     orders
+> JOIN
+>     customers
+>     ON orders.customer_id = customers.customer_id
+> ```
+
+When selecting columns keep in mind that the column used to JOIN the tables will then become unselectable as MySQL will be confused as to which table to pull data from.
+
+> ```sql
+> -- to solve the issue above prefixed whichever table to get the column from
+> SELECT
+>     order_id, customers.customer_id, first_name, last_name
+> FROM
+>     orders
+> JOIN
+>     customers
+>     ON orders.customer_id = customers.customer_id
+> ```
+
+Specifically stating in what table to pull the data from will however fix the issue.
+
+> ```sql
+> SELECT
+>     order_id, orders.customer_id, first_name, last_name
+> FROM
+>     orders
+> JOIN
+>     customers
+>     ON orders.customer_id = customers.customer_id
+> ```
+
+It doesn't matter which table is used to solve an ambiguous error.
+
+#### ON
+**ON** - combine in what column two or more tables.
+
+> ```sql
+> -- join the orders and customers table via their shared column customer_id
+> SELECT
+>     *
+> FROM
+>     orders
+> JOIN
+>     customers
+>     ON orders.customer_id = customers.customer_id 
+> ```
+
+Note the ON, JOIN needs an ON clause to function so it's JOIN-ON. Without an ON clause and the provided column a JOIN clause will not know where exactly to join two or more tables.
+
+### Aliasing Tables to Make Joins Cleaner
+**AS** - alias tables and columns.
+
+> ```sql
+> -- aliasing your tables would make prefixing much easier
+> SELECT
+>     order_id, o.customer_id, first_name, last_name
+> FROM
+>     orders AS o
+> JOIN
+>     customers AS c
+>     ON o.customer_id = c.customer_id
+> ```
+
+Either with the AS clause.
+
+> ```sql
+> -- AS clause can be completely foregone when aliasing
+> SELECT
+>     order_id, o.customer_id, first_name, last_name
+> FROM
+>     orders o
+> JOIN
+>     customers c
+>     ON o.customer_id = c.customer_id
+> ```
+
+Or without the AS clause, aliasing will still work.
