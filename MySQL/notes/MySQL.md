@@ -42,7 +42,8 @@
   - [Joining](#joining)
     - [(INNER) JOIN](#inner-join)
       - [ON](#on)
-    - [Aliasing Tables to Make Joins Cleaner](#aliasing-tables-to-make-joins-cleaner)
+      - [Aliasing Tables to Make Joins Cleaner](#aliasing-tables-to-make-joins-cleaner)
+      - [Joining Across Databases](#joining-across-databases)
 
 # Database
 A collection of data stored in a format that can be easily accessed.
@@ -711,7 +712,7 @@ It doesn't matter which table is used to solve an ambiguous error.
 
 Note the ON, JOIN needs an ON clause to function so it's JOIN-ON. Without an ON clause and the provided column a JOIN clause will not know where exactly to join two or more tables.
 
-### Aliasing Tables to Make Joins Cleaner
+#### Aliasing Tables to Make Joins Cleaner
 **AS** - alias tables and columns.
 
 > ```sql
@@ -739,3 +740,18 @@ Either with the AS clause.
 > ```
 
 Or without the AS clause, aliasing will still work.
+
+#### Joining Across Databases
+
+> ```sql
+> USE sql_store;
+>
+> SELECT
+>     *
+> FROM
+>     order_items oi
+> JOIN sql_inventory.products p
+>     ON oi.product_id = p.product_id
+> ```
+
+To join two tables from different databases simply prefix the name of the database before the name of the table. In this case the products table comes from the sql_inventory database while the order_items table has no need for prefixing because we are querying inside it already.
