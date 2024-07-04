@@ -41,9 +41,13 @@
     - [LIMIT](#limit)
   - [Joining](#joining)
     - [(INNER) JOIN](#inner-join)
-      - [ON](#on)
-      - [Aliasing Tables to Make Joins Cleaner](#aliasing-tables-to-make-joins-cleaner)
-      - [Joining Across Databases](#joining-across-databases)
+    - [ON](#on)
+    - [Aliasing Tables to Make Joins Cleaner](#aliasing-tables-to-make-joins-cleaner)
+    - [Joining Across Databases](#joining-across-databases)
+    - [Self Joins](#self-joins)
+    - [Joining Multiple Tables](#joining-multiple-tables)
+    - [Compound Joins](#compound-joins)
+    - [OUTER JOINS](#outer-joins)
 
 # Database
 A collection of data stored in a format that can be easily accessed.
@@ -696,7 +700,7 @@ Specifically stating in what table to pull the data from will however fix the is
 
 It doesn't matter which table is used to solve an ambiguous error.
 
-#### ON
+### ON
 **ON** - combine in what column two or more tables.
 
 > ```sql
@@ -712,7 +716,7 @@ It doesn't matter which table is used to solve an ambiguous error.
 
 Note the ON, JOIN needs an ON clause to function so it's JOIN-ON. Without an ON clause and the provided column a JOIN clause will not know where exactly to join two or more tables.
 
-#### Aliasing Tables to Make Joins Cleaner
+### Aliasing Tables to Make Joins Cleaner
 **AS** - alias tables and columns.
 
 > ```sql
@@ -741,7 +745,7 @@ Either with the AS clause.
 
 Or without the AS clause, aliasing will still work.
 
-#### Joining Across Databases
+### Joining Across Databases
 
 > ```sql
 > USE sql_store;
@@ -755,3 +759,70 @@ Or without the AS clause, aliasing will still work.
 > ```
 
 To join two tables from different databases simply prefix the name of the database before the name of the table. In this case the products table comes from the sql_inventory database while the order_items table has no need for prefixing because we are querying inside it already.
+
+### Self Joins
+Tables can be joined with themselves. 
+
+> ```sql
+> USE sql_hr;
+> 
+> -- This self join gets all the value of reports_to and matches it to the 
+> -- equivalent value in employee_id to create on organization chart (The
+> -- employees and who their manager are)
+> SELECT 
+>     e.employee_id,
+>     e.first_name,
+>     m.first_name AS manager
+> FROM
+>     employees e
+> JOIN
+>     employees m
+>     ON e.reports_to = m.employee_id
+> ```
+
+The code above will list the manager who is also an employee as a column of each employee he or she manages.
+
+### Joining Multiple Tables
+Tables can be joined with multiple other tables.
+
+> ```sql
+> SELECT *
+> FROM orders o
+> JOIN customers c
+>     ON o.customer_id = c.customer_id
+> JOIN order_statuses os
+>     ON o.status = os.order_status_id
+> ```
+
+Joins the orders table with the customers table via customer_id and then joins the orders table with the order_statuses table via the order_status_id column note that the column has a different name in the orders table
+
+> ```sql
+> SELECT 
+>     o.order_id,
+>     o.order_date,
+>     c.first_name,
+>     c.last_name,
+>     os.name AS status
+> FROM orders o
+> JOIN customers c
+>     ON o.customer_id = c.customer_id
+> JOIN order_statuses os
+>     ON o.status = os.order_status_id
+> ```
+
+Same as above but display only certain columns to display an owner's order status
+
+### Compound Joins
+Tables can be joined on more than one similar pair of columns.
+
+> ```sql
+> SELECT *
+> FROM order_items oi
+> JOIN order_item_notes oin
+>     ON oi.order_id = oin.order_id
+>     AND oi.product_id = oin.product_id
+> ```
+
+The above code will join two table on 4 columns in total due to compound joining with two pairs of columns.
+
+### OUTER JOINS
