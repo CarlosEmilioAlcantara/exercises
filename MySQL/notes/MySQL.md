@@ -48,6 +48,10 @@
     - [Joining Multiple Tables](#joining-multiple-tables)
     - [Compound Joins](#compound-joins)
     - [OUTER JOINS](#outer-joins)
+      - [LEFT (OUTER) JOIN](#left-outer-join)
+      - [RIGHT (OUTER) JOIN](#right-outer-join)
+      - [Multiple Outer Joins](#multiple-outer-joins)
+      - [Self Outer Joins](#self-outer-joins)
 
 # Database
 A collection of data stored in a format that can be easily accessed.
@@ -631,7 +635,7 @@ The code above will limit row of records to the 7th to 9th record this is called
 
 ## Joining
 ### (INNER) JOIN
-**JOIN** - combine rows from two or more tables, based on a related column between them.
+**JOIN** - combine rows from two or more tables, based on a related column between them. Only returns rows where data matches in both tables.
 
 > ```sql
 > -- join the orders and customers table via their shared column customer_id
@@ -826,3 +830,101 @@ Tables can be joined on more than one similar pair of columns.
 The above code will join two table on 4 columns in total due to compound joining with two pairs of columns.
 
 ### OUTER JOINS
+Outer joins are joins that return matched and unmatched values.
+
+Types of Outer Joins:
+1. ```LEFT (OUTER) JOIN``` - return matched and unmatched values from the left table (table we're joining FROM).
+2. ```RIGHT (OUTER) JOIN``` - return matched and unmatched values from the right table (table we're JOINing to).
+3. ```FULL OUTER JOIN``` - return matched and unmatched values from both sides.
+
+#### LEFT (OUTER) JOIN
+**LEFT (OUTER) JOIN** - return matched and unmatched values from the left table (table we're joining FROM).
+
+> ```sql
+> USE sql_store;
+> 
+> -- Returns all customers even those without any orders
+> SELECT 
+>     c.customer_id,
+>     c.first_name,
+>     o.order_id
+> FROM customers c
+> LEFT JOIN orders o
+>     ON c.customer_id = o.customer_id;
+> ```
+
+Will return all rows of customers even those without any order IDs.
+
+#### RIGHT (OUTER) JOIN
+**RIGHT (OUTER) JOIN** - return matched and unmatched values from the right table (table we're JOINing to). Avoid as best practice (you read from left to right naturally).
+
+> ```sql
+> -- Returns all orders even those without any customers
+> -- Since all orders must have a customer to be created this will actually just
+> -- return the same records as an (INNER) JOIN
+> SELECT 
+>     c.customer_id,
+>     c.first_name,
+>     o.order_id
+> FROM customers c
+> RIGHT JOIN orders o
+>     ON c.customer_id = o.customer_id
+> ORDER BY c.customer_id;
+> ```
+
+Join orders witth the customers table via the column customer_id and return rows that are matched (has an equivalent customer_id in the customers table) and unmatched (does not have an equivalent customer_id in the customers table). Will return no NULL however as all orders have customers.
+
+> ```sql
+> -- Swap the tables for a RIGHT (OUTER) JOIN to return values that makes sense
+> -- Since the customers table (a table that can have NULL order_id values)
+> SELECT 
+>     c.customer_id,
+>     c.first_name,
+>     o.order_id
+> FROM orders o
+> RIGHT JOIN customers c
+>     ON c.customer_id = o.customer_id
+> ORDER BY c.customer_id;
+> ```
+
+Join customers with the orders table via the column customer_id and return rows that are matched (has an equivalent customer_id in the orders table) and unmatched (does not have an equivalent customer_id in the orders table). Will return NULL as customers can have no orders.
+
+#### Multiple Outer Joins
+Just like (INNER) JOINs, (OUTER) JOINs can also be combined.
+
+> ```sql
+> -- Return customers with or without orders and with shippers (shipped)
+> SELECT 
+>     c.customer_id,
+>     c.first_name,
+>     o.order_id,
+>     sh.name AS shipper
+> FROM customers c
+> LEFT JOIN orders o
+>     ON c.customer_id = o.customer_id
+> JOIN shippers sh
+>     ON o.shipper_id = sh.shipper_id
+> ORDER BY c.customer_id;
+> ```
+
+Return all orders with or without orders but since we're joining only those that have shippers i.e. have been shipped, the result is quite limited.
+
+> ```sql
+> -- Return customers with or without orders and with or without shippers
+> -- (not shipped)
+> SELECT 
+>     c.customer_id,
+>     c.first_name,
+>     o.order_id,
+>     sh.name AS shipper
+> FROM customers c
+> LEFT JOIN orders o
+>     ON c.customer_id = o.customer_id
+> LEFT JOIN shippers sh
+>     ON o.shipper_id = sh.shipper_id
+> ORDER BY c.customer_id;
+> ```
+
+Return all orders with or without orders but also join those that do not have shippers i.e. have not been shipped (more results).
+
+#### Self Outer Joins
