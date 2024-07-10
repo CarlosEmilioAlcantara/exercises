@@ -52,6 +52,10 @@
       - [RIGHT (OUTER) JOIN](#right-outer-join)
       - [Multiple Outer Joins](#multiple-outer-joins)
       - [Self Outer Joins](#self-outer-joins)
+    - [USING](#using)
+      - [Compound Joins with USING](#compound-joins-with-using)
+    - [NATURAL JOIN](#natural-join)
+    - [CROSS JOIN](#cross-join)
 
 # Database
 A collection of data stored in a format that can be easily accessed.
@@ -928,3 +932,99 @@ Return all orders with or without orders but since we're joining only those that
 Return all orders with or without orders but also join those that do not have shippers i.e. have not been shipped (more results).
 
 #### Self Outer Joins
+> ```sql
+> -- This will fix the problem by displaying the manager's records even if he or
+> -- she has no manager
+> SELECT
+>     e.employee_id,
+>     e.first_name,
+>     m.first_name AS manager
+> FROM employees e
+> LEFT JOIN employees m
+>     ON e.reports_to = m.employee_id;
+> ```
+
+To solve problems of having to show records with null data on self joins, outer joins can also be used.
+
+### USING
+**USING** - join tables based on two similar columns WITH the same name. will only work if the two columns have the same name on the tables.
+
+> ```sql
+> USE sql_store;
+> 
+> SELECT
+>     o.order_id,
+>     c.first_name,
+>     sh.name AS shipper
+> FROM orders o
+> JOIN customers c
+>     USING (customer_id)
+> LEFT JOIN shippers sh
+>     USING (shipper_id)
+> ```
+
+Will join the orders and customers table on the customer_id table which both have the same values and the same name on each table. Then join the orders table with shippers table using shipper_id using a left outer join to also show the orders that have no shippers.
+
+#### Compound Joins with USING
+To make compound joins less confusing you can use the USING clause.
+
+> ```sql
+> SELECT *
+> FROM order_items
+> JOIN order_item_notes
+>     USING (order_id, product_id)
+> ```
+
+Join order_items with order_items_notes using two columns, order_id and product_id.
+
+> ```sql
+> USE sql_invoicing;
+> 
+> SELECT
+>     p.date,
+>     c.name,
+>     p.amount,
+>     pm.name
+> FROM clients c
+> JOIN payments p
+>     USING (client_id)
+> JOIN payment_methods pm
+>     ON p.payment_method = pm.payment_method_id;
+> ```
+
+Sometimes column names while having the same values have different names in which case the USING clause cannot be used.
+
+### NATURAL JOIN
+**NATURAL JOIN** - join implicitly based on columns with the same names. Not advised to use due to unexpected result.
+
+> ```sql
+> SELECT *
+> FROM orders o
+> NATURAL JOIN customers c
+> ```
+
+Will join the orders and customers table based on whichever columns they happen to share (customer_id in this case).
+
+### CROSS JOIN
+**CROSS JOIN** - pair each row of the left table with all rows of the right table. Since we're essentially just joining the entirety of the tables. Has no need for similar columns.
+
+> ```sql
+> SELECT
+>     c.first_name AS customer,
+>     p.name AS product
+> FROM customers c
+> CROSS JOIN products p
+> ORDER BY c.first_name;
+> ```
+
+Joins each customer's first name with every product name and order by customer name.
+
+> ```sql
+> SELECT
+>     c.first_name AS customer,
+>     p.name AS product
+> FROM customers c, products p
+> ORDER BY c.first_name;
+> ```
+
+Cross joins can also be implicit.
